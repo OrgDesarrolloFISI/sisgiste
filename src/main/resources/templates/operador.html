@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>SISGISTE</title>
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+
+</head>
+<body>
+	<div class="jumbotron text-center bg-info">
+		<h1>Sistema de Gestion de Incidencias de Soporte T&eacute;cnico</h1>
+		<h2>
+			Fecha: <span th:text="${fechaActual}"></span>
+		</h2>
+	</div>
+	<div>
+		<div class="col text-center">
+			<button class="btn btn-primary"
+				onclick="mostrarModalAgregarIncidencia(this)"
+				th:attr="IDIncidencia=${IDIncidencia}">Agregar Incidencia</button>
+		</div>
+	</div>
+
+	<hr />
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>ID</th>
+				<th>T&eacute;cnico Recepcionista</th>
+				<th>Oficina</th>
+				<th>Operaci&oacute;n</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="incidencia : ${listaIncidencias}">
+				<th scope="row" th:text="${incidencia.idIncidencia}"></th>
+				<td th:text="${incidencia.nombreTecnicoRecepcionista}"></td>
+				<td th:text="${incidencia.nombreOficina}"></td>
+				<td>
+					<button type="button"
+						th:attr="IDIncidencia=${incidencia.idIncidencia}, IDRecepcionista=${incidencia.idTecnicoRecepcionista},nombreRecepcionista=${incidencia.nombreTecnicoRecepcionista}, IDOficina=${incidencia.idLugarIncidencia}, nombreOficina=${incidencia.nombreOficina}"
+						onclick="mostrarModal(this)">Acci&oacute;n</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<!-- Modal Agregar Incidencia-->
+	<div class="modal" id="ModalCentrado" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenteredLabel">Agregar
+						Incidencia</h5>
+					<button type="button" class="close"
+						onclick="cerrarModalAgregarIncidencia()" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form th:action="@{/registrarIncidencia}" th:object="${incidencia}"
+					method="post">
+					<div class="modal-body">
+
+						<div class="form-group">
+							<label class="col-sm-4">Ticket: </label> <label
+								th:text="${incidencia.idIncidencia}"></label> <input
+								type="hidden" id="idIncidencia" th:field="*{idIncidencia}" />
+
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-form-label" for="recepcionistaInput">Recepcionista:</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="recepcionistaInput"
+									th:field="*{idTecnicoRecepcionista}">
+									<option th:each="tecnico : ${listaTecnicos}"
+										th:value="${tecnico.idTecnico}"
+										th:text="${tecnico.nombreCompleto}"></option>
+								</select>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-form-label" for="oficinaInput">Oficina:</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="oficinaInput"
+									th:field="*{idLugarIncidencia}">
+									<option th:each="lugarIncidencia : ${listaLugaresIncidencia}"
+										th:value="${lugarIncidencia.idLugarIncidencia}"
+										th:text="${lugarIncidencia.nombreLugarIncidencia}"></option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							onclick="cerrarModalAgregarIncidencia()">Cerrar</button>
+						<button type="submit" class="btn btn-success">Guardar
+							Cambios</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Modal Guardar toda la Incidencia-->
+	<div class="modal" id="ModalCentradoGuardar" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenteredLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenteredLabel">Guardar
+						Incidencia</h5>
+					<button type="button" class="close"
+						onclick="cerrarModalGuardarIncidencia()" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form th:action="@{/actualizarIncidencia}" th:object="${incidencia}"
+					method="post">
+					<div class="modal-body">
+
+						<div class="form-group">
+							<label class="col-sm-4">Ticket: </label> <label id="numeroTicket"
+								th:text="${incidencia.idIncidencia}"></label> <input
+								type="hidden" th:field="*{idIncidencia}"
+								id="idIncidenciaGuardar">
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-form-label"
+								for="recepcionistaInputGuardar">Recepcionista:</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="recepcionistaInputGuardar"
+									th:field="*{idTecnicoRecepcionista}">
+								</select>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-form-label" for="oficinaInputGuardar">Oficina:</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="oficinaInputGuardar"
+									th:field="*{idLugarIncidencia}">
+								</select>
+							</div>
+
+						</div>
+						<div class="form-grup">
+							<label class="col-sm-4 col-form-label" for="nombreUsuario">Nombre
+								de usuario:</label>
+							<div class="col-sm-8">
+								<input class="form-control" id="nombreUsuario" type="text"
+									th:field="*{usuario}" />
+							</div>
+
+						</div>
+						<div class="form-grup">
+							<label class="col-sm-4 col-form-label" for="equipoInput">Equipo:</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="equipoInput"
+									th:field="*{idEquipo}">
+									<option th:each="equipo : ${listaEquipos}"
+										th:value="${equipo.idTipoEquipo}"
+										th:text="${equipo.nombreTipoEquipo}"></option>
+								</select>
+							</div>
+
+						</div>
+						<div class="form-grup">
+							<label class="col-sm-4 col-form-label" for="SBNInput">SBN
+								o Serial:</label>
+							<div class="col-sm-8">
+								<input class="form-control" id="SBNInput" type="text"
+									th:field="*{SBN}" />
+							</div>
+
+						</div>
+						<div class="form-grup">
+							<label class="col-sm-4 col-form-label" for="problema">Problema:</label>
+							<div class="col-sm-8">
+								<textarea class="form-control" id="problema" rows="4"
+									th:field="*{problema}"></textarea>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 col-form-label" for="solucionadorInput">Solucionador:</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="solucionadorInput"
+									th:field="*{idTecnicoSolucionador}">
+									<option th:each="tecnico : ${listaTecnicos}"
+										th:value="${tecnico.idTecnico}"
+										th:text="${tecnico.nombreCompleto}"></option>
+								</select>
+							</div>
+
+						</div>
+						<div class="form-grup">
+							<label class="col-sm-4col-form-label" for="solucionDesc">Soluci&oacute;n:</label>
+							<div class="col-sm-8">
+								<textarea class="form-control" id="solucionDesc" rows="4"
+									th:field="*{descripcionSolucion}"></textarea>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							onclick="cerrarModalGuardarIncidencia()">Cerrar</button>
+						<button type="submit" class="btn btn-success">Guardar
+							Cambios</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Agregamos el jquery y bootstrap -->
+	<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+
+	<!-- Agregamos nuestro JavaScript para el manejo de los modales -->
+	<script th:src="@{/acciones.js}"></script>
+</body>
+</html>
