@@ -8,4 +8,7 @@
   <table-filter match-catalog="modelogeneralfisi" match-name="tipo_equipo"/>
   <table-filter match-catalog="modelogeneralfisi" match-name="lugar_incidencia"/>
   <table-filter match-catalog="modelogeneralfisi" match-name="tecnico"/>
+  <table-filter match-catalog="modelogeneralfisi" match-name="usuario"/>
+  <table-filter match-catalog="modelogeneralfisi" match-name="tipo_usuario"/>
+  <table-filter match-catalog="modelogeneralfisi" match-name="sistema"/>
 </hibernate-reverse-engineering>

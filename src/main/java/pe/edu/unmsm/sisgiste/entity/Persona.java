@@ -1,5 +1,5 @@
 package pe.edu.unmsm.sisgiste.entity;
-// Generated 29/01/2019 03:15:07 PM by Hibernate Tools 4.3.5.Final
+// Generated 03-feb-2019 18:44:56 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -37,6 +37,7 @@ public class Persona implements java.io.Serializable {
 	private String personaCodigoSistema;
 	private String personaPasswordSistema;
 	private String personaPasswordSistema2;
+	private Set<Usuario> usuarios = new HashSet<Usuario>(0);
 	private Set<Tecnico> tecnicos = new HashSet<Tecnico>(0);
 
 	public Persona() {
@@ -51,7 +52,8 @@ public class Persona implements java.io.Serializable {
 	public Persona(String personaCodigo, String personaNombre, String personaAppaterno, String personaApmaterno,
 			String personaTelefono, String personaCorreo, String personaDireccion, String personaDni,
 			Date personaFechaNacimiento, String personaSexo, String personaEstadoCivil, String personaCodigoSistema,
-			String personaPasswordSistema, String personaPasswordSistema2, Set<Tecnico> tecnicos) {
+			String personaPasswordSistema, String personaPasswordSistema2, Set<Usuario> usuarios,
+			Set<Tecnico> tecnicos) {
 		this.personaCodigo = personaCodigo;
 		this.personaNombre = personaNombre;
 		this.personaAppaterno = personaAppaterno;
@@ -66,6 +68,7 @@ public class Persona implements java.io.Serializable {
 		this.personaCodigoSistema = personaCodigoSistema;
 		this.personaPasswordSistema = personaPasswordSistema;
 		this.personaPasswordSistema2 = personaPasswordSistema2;
+		this.usuarios = usuarios;
 		this.tecnicos = tecnicos;
 	}
 
@@ -208,6 +211,15 @@ public class Persona implements java.io.Serializable {
 		this.personaPasswordSistema2 = personaPasswordSistema2;
 	}
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "persona")
+	public Set<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "persona")
 	public Set<Tecnico> getTecnicos() {
 		return this.tecnicos;
@@ -216,5 +228,18 @@ public class Persona implements java.io.Serializable {
 	public void setTecnicos(Set<Tecnico> tecnicos) {
 		this.tecnicos = tecnicos;
 	}
+
+	@Override
+	public String toString() {
+		return "Persona [idPersona=" + idPersona + ", personaCodigo=" + personaCodigo + ", personaNombre="
+				+ personaNombre + ", personaAppaterno=" + personaAppaterno + ", personaApmaterno=" + personaApmaterno
+				+ ", personaTelefono=" + personaTelefono + ", personaCorreo=" + personaCorreo + ", personaDireccion="
+				+ personaDireccion + ", personaDni=" + personaDni + ", personaFechaNacimiento=" + personaFechaNacimiento
+				+ ", personaSexo=" + personaSexo + ", personaEstadoCivil=" + personaEstadoCivil
+				+ ", personaCodigoSistema=" + personaCodigoSistema + ", personaPasswordSistema="
+				+ personaPasswordSistema + ", personaPasswordSistema2=" + personaPasswordSistema2 + ", usuarios="
+				+ usuarios + ", tecnicos=" + tecnicos + "]";
+	}
+	
 
 }

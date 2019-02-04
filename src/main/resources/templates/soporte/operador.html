@@ -5,7 +5,8 @@
 <title>SISGISTE</title>
 <link rel="stylesheet"
 	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
-
+<link rel="stylesheet"
+	th:href="@{/webjars/font-awesome/5.6.3/css/font-awesome.min.css}" />
 </head>
 <body>
 	<div class="jumbotron text-center bg-info">
@@ -41,7 +42,7 @@
 				<td>
 					<button type="button"
 						th:attr="IDIncidencia=${incidencia.idIncidencia}, IDRecepcionista=${incidencia.idTecnicoRecepcionista},nombreRecepcionista=${incidencia.nombreTecnicoRecepcionista}, IDOficina=${incidencia.idLugarIncidencia}, nombreOficina=${incidencia.nombreOficina}"
-						onclick="mostrarModal(this)">Acci&oacute;n</button>
+						onclick="mostrarModal(this)" class="btn btn-primary"><i class="fas fa-save"></i>Terminar</button>
 				</td>
 			</tr>
 		</tbody>
@@ -71,7 +72,7 @@
 								type="hidden" id="idIncidencia" th:field="*{idIncidencia}" />
 
 						</div>
-						<div class="form-group">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label" for="recepcionistaInput">Recepcionista:</label>
 							<div class="col-sm-8">
 								<select class="form-control" id="recepcionistaInput"
@@ -83,7 +84,7 @@
 							</div>
 
 						</div>
-						<div class="form-group">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label" for="oficinaInput">Oficina:</label>
 							<div class="col-sm-8">
 								<select class="form-control" id="oficinaInput"
@@ -128,13 +129,13 @@
 					method="post">
 					<div class="modal-body">
 
-						<div class="form-group">
+						<div class="form-group row">
 							<label class="col-sm-4">Ticket: </label> <label id="numeroTicket"
 								th:text="${incidencia.idIncidencia}"></label> <input
 								type="hidden" th:field="*{idIncidencia}"
 								id="idIncidenciaGuardar">
 						</div>
-						<div class="form-group">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label"
 								for="recepcionistaInputGuardar">Recepcionista:</label>
 							<div class="col-sm-8">
@@ -144,7 +145,7 @@
 							</div>
 
 						</div>
-						<div class="form-group">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label" for="oficinaInputGuardar">Oficina:</label>
 							<div class="col-sm-8">
 								<select class="form-control" id="oficinaInputGuardar"
@@ -153,7 +154,7 @@
 							</div>
 
 						</div>
-						<div class="form-grup">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label" for="nombreUsuario">Nombre
 								de usuario:</label>
 							<div class="col-sm-8">
@@ -162,7 +163,7 @@
 							</div>
 
 						</div>
-						<div class="form-grup">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label" for="equipoInput">Equipo:</label>
 							<div class="col-sm-8">
 								<select class="form-control" id="equipoInput"
@@ -174,7 +175,7 @@
 							</div>
 
 						</div>
-						<div class="form-grup">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label" for="SBNInput">SBN
 								o Serial:</label>
 							<div class="col-sm-8">
@@ -183,7 +184,7 @@
 							</div>
 
 						</div>
-						<div class="form-grup">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label" for="problema">Problema:</label>
 							<div class="col-sm-8">
 								<textarea class="form-control" id="problema" rows="4"
@@ -191,7 +192,7 @@
 							</div>
 
 						</div>
-						<div class="form-group">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label" for="solucionadorInput">Solucionador:</label>
 							<div class="col-sm-8">
 								<select class="form-control" id="solucionadorInput"
@@ -203,8 +204,8 @@
 							</div>
 
 						</div>
-						<div class="form-grup">
-							<label class="col-sm-4col-form-label" for="solucionDesc">Soluci&oacute;n:</label>
+						<div class="form-group row">
+							<label class="col-sm-4 col-form-label" for="solucionDesc">Soluci&oacute;n:</label>
 							<div class="col-sm-8">
 								<textarea class="form-control" id="solucionDesc" rows="4"
 									th:field="*{descripcionSolucion}"></textarea>
@@ -229,6 +230,6 @@
 	<script th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 
 	<!-- Agregamos nuestro JavaScript para el manejo de los modales -->
-	<script th:src="@{/acciones.js}"></script>
+	<script th:src="@{/js/acciones.js}"></script>
 </body>
 </html>

@@ -22,11 +22,7 @@ public class OperadorController {
 	@Autowired TecnicoService tecnicoService;
 	@Autowired LugarIncidenciaService lugarIncidenciaService;
 	@Autowired TipoEquipoService tipoEquipoService;
-	
-	@RequestMapping("/")
-	public String redirectoperador(){
-		return "redirect:/operador";
-	}
+
 	
 	@RequestMapping("/operador")
 	public String operador(Model model){
@@ -43,14 +39,13 @@ public class OperadorController {
 		model.addAttribute("listaEquipos", tipoEquipoService.obtenerTiposEquipo());
 		model.addAttribute("listaIncidencias", incidenciaService.obtenerIncidenciasActivas());
 		
-		return "operador";
+		return "soporte/operador";
 	}
 	
 	@PostMapping("/registrarIncidencia")
 	public String registrarIncidencia(@ModelAttribute("incidencia") IncidenciaModel IM){
 		System.out.println("IM Recibido para guardar: "+IM);
 		IncidenciaModel IMGuardado = incidenciaService.guardarIncidencia(IM);
-		//System.out.println(IMGuardado);
 		return "redirect:/operador";
 	}
 	

@@ -1,5 +1,5 @@
 package pe.edu.unmsm.sisgiste.entity;
-// Generated 29/01/2019 03:15:07 PM by Hibernate Tools 4.3.5.Final
+// Generated 03-feb-2019 18:44:56 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
