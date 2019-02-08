@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import pe.edu.unmsm.sisgiste.entity.Incidencia;
 import pe.edu.unmsm.sisgiste.entity.Persona;
 import pe.edu.unmsm.sisgiste.model.IncidenciaModel;
+import pe.edu.unmsm.sisgiste.model.IncidenciaReporteModel;
 import pe.edu.unmsm.sisgiste.repository.LugarIncidenciaRepository;
 import pe.edu.unmsm.sisgiste.repository.TecnicoRepository;
 import pe.edu.unmsm.sisgiste.repository.TipoEquipoRepository;
@@ -63,5 +64,18 @@ public class IncidenciaConvertor {
 		String nombreTecnicoRecepcionista=p.getPersonaAppaterno()+" "+p.getPersonaApmaterno()+", "+p.getPersonaNombre();
 		out.setNombreTecnicoRecepcionista(nombreTecnicoRecepcionista);
 		return out;
+	}
+	
+	public IncidenciaReporteModel convertirEntityAReporteModel(Incidencia I){
+		IncidenciaReporteModel reporteModel=new IncidenciaReporteModel();
+		String [] fechaPartes= I.getIncidenciaFecha().toString().split("-");	//Formato: YYYY-mm-dd
+		String fechaFinal=fechaPartes[2]+"/"+fechaPartes[1]+"/"+fechaPartes[0];	//Formato Nuevo: dd/mm/YYYY
+		
+		reporteModel.setFecha(fechaFinal);
+		reporteModel.setLugarIncidencia(I.getLugarIncidencia().getLugarIncidenciaNombre());
+		reporteModel.setProblema(I.getProblema());
+		reporteModel.setSolucion(I.getIncidenciaDescripcionSolucion());
+		
+		return reporteModel;
 	}
 }

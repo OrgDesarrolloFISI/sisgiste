@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.edu.unmsm.sisgiste.convertor.IncidenciaConvertor;
 import pe.edu.unmsm.sisgiste.entity.Incidencia;
 import pe.edu.unmsm.sisgiste.model.IncidenciaModel;
+import pe.edu.unmsm.sisgiste.model.IncidenciaReporteModel;
 import pe.edu.unmsm.sisgiste.repository.IncidenciaRepository;
 import pe.edu.unmsm.sisgiste.service.IncidenciaService;
 import pe.edu.unmsm.sisgiste.util.Tiempo;
@@ -44,16 +45,16 @@ public class IncidenciaServiceImpl implements IncidenciaService {
 		Date HoraFin = tiempo.obtenerFechaYHoraActual();
 
 		Incidencia Iaux = incidenciaRepo.findByIdIncidencia(incidenciaModel.getIdIncidencia());
-		
+
 		incidenciaModel.setFechaIncidencia(Iaux.getIncidenciaFecha());
 		incidenciaModel.setHoraInicio(Iaux.getIncidenciaHoraInicio());
-		
+
 		Incidencia I = incidenciaConvertor.convertirDeModelAEntity(incidenciaModel);
-		
+
 		I.setIncidenciaHoraFin(HoraFin);
 		I.setEstado("0");
 		Incidencia IExito = incidenciaRepo.save(I);
-		
+
 		return (IExito == null) ? null : incidenciaConvertor.convertirDeEntityAModel(IExito);
 	}
 
@@ -77,6 +78,29 @@ public class IncidenciaServiceImpl implements IncidenciaService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<IncidenciaReporteModel> obtenerIncidenciasPorIdTecnico(Integer idTecnico) {
+		List<IncidenciaReporteModel> incidenciaReporteLista = new ArrayList<IncidenciaReporteModel>();
+		List<Incidencia> incidencias = incidenciaRepo.findIncidenciasConcluidasPorIdTecnico(idTecnico);
+		for (Incidencia I : incidencias) {
+			incidenciaReporteLista.add(incidenciaConvertor.convertirEntityAReporteModel(I));
+		}
+		return incidenciaReporteLista;
+	}
+
+	@Override
+	public List<IncidenciaReporteModel> obtenerIncidenciasPorIdTecnicoPorFechasInicioFin(String idTecnico,
+			String fechaInicio, String fechaFin) {
+		List<IncidenciaReporteModel> incidenciaReporteLista = new ArrayList<IncidenciaReporteModel>();
+		List<Incidencia> incidencias = incidenciaRepo.findIncidenciasConcluidasPorIdTecnicoEntreFechas(
+				Integer.parseInt(idTecnico), tiempo.obtenerFechaDeString(fechaInicio),
+				tiempo.obtenerFechaDeString(fechaFin));
+		for (Incidencia I : incidencias) {
+			incidenciaReporteLista.add(incidenciaConvertor.convertirEntityAReporteModel(I));
+		}
+		return incidenciaReporteLista;
 	}
 
 }

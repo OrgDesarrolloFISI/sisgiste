@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>SISGISTE</title>
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/font-awesome/5.6.3/css/font-awesome.min.css}" />
+	<link rel="stylesheet" th:ref="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+</head>
+<body>
+
+	<form class="form-inline" th:object="${busquedaReporte}"
+		th:action="@{/reporteImprimir}" method="post">
+		<label class="sr-only" for="inlineFormInputName2">Bolsista</label> 
+		<select	class="form-control mr-sm-2" th:field="*{idTecnico}">
+			<option th:each="tecnico : ${listaTecnicos}"
+				th:value="${tecnico.idTecnico}" th:text="${tecnico.nombreCompleto}"></option>
+		</select>
+		<div class="input-group mb-2 mr-sm-2">
+			<label class="sr-only" for="fechaInicio">Fecha Inicio</label> <input
+				id="fechaInicio" type="text" th:field="*{fechaInicioBusqueda}" />
+		</div>
+		<div class="input-group mb-2 mr-sm-2">
+			<label class="sr-only" for="fechaFin">Fecha Inicio</label> <input
+				id="fechaFin" type="text" th:field="*{fechaFinBusqueda}" />
+		</div>
+
+		<button type="submit" class="btn btn-primary mb-2">Submit</button>
+	</form>
+
+	<!-- Agregamos el jquery y bootstrap -->
+	<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+	<!-- Agregamos nuestro JavaScript para ponerle formato a las fechas -->
+	<script th:src="@{/js/fechas.js}"></script>
+</body>
+</html>

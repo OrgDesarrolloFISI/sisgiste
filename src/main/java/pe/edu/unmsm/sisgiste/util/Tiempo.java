@@ -14,23 +14,36 @@ public class Tiempo {
 		return fechaActual;
 	}
 	
+	public Date obtenerFechaDeString(String fechaString){
+		Calendar cal=Calendar.getInstance();
+
+		String [] fechaPartes= fechaString.split("/");		//Formato: dd/mm/yyyy
+		int dia = Integer.parseInt(fechaPartes[0]);
+		int mes = Integer.parseInt(fechaPartes[1])-1;
+		int anio = Integer.parseInt(fechaPartes[2]);
+		
+		cal.set(anio,mes,dia);
+		Date fecha=cal.getTime();
+		
+		return fecha;
+		
+	}
 	
 	public String obtenerFechaActual(){
 		Date fechaActual= new Date();
 		Calendar cal= Calendar.getInstance();
 		cal.setTime(fechaActual);
 		
-		String salida=cal.get(Calendar.DAY_OF_MONTH)+"/"+convertirMesADosCifras(cal.get(Calendar.MONTH))+"/"+cal.get(Calendar.YEAR);
+		String salida=convertirADosCifras(cal.get(Calendar.DAY_OF_MONTH))+"/"+convertirADosCifras(cal.get(Calendar.MONTH))+"/"+cal.get(Calendar.YEAR);
 		return salida;
 	}
 	
-	public String convertirMesADosCifras(int mes){
+	public String convertirADosCifras(int mes){
 		mes++;
 		String mesString="";
 		if(mes>=0 && mes<=9)
 			mesString+="0";
 		mesString+=mes;
 		return mesString;
-		
 	}
 }
