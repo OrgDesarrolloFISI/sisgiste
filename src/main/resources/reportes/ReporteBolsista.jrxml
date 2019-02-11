@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteBolsista" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c5801e2-f2f1-41c7-a076-fec0ae6dcd4d">
-	<property name="ireport.zoom" value="1.7715610000000084"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="3.79749833583243"/>
+	<property name="ireport.x" value="546"/>
+	<property name="ireport.y" value="102"/>
 	<parameter name="nombreBolsista" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -26,7 +25,7 @@
 				<text><![CDATA[Reporte de ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="180" y="53" width="320" height="29" uuid="a208ba99-f0e1-4ef2-9914-757e3660eb56"/>
+				<reportElement x="180" y="50" width="320" height="29" uuid="a208ba99-f0e1-4ef2-9914-757e3660eb56"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -40,28 +39,28 @@
 				<text><![CDATA[Sistema de Gestión de Incidencias de Soporte Técnico]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="FixRelativeToBottom" x="86" y="80" width="136" height="29" uuid="afe0dd06-d314-4648-adc9-76685ba3d33d"/>
+				<reportElement positionType="FixRelativeToBottom" x="115" y="80" width="136" height="28" uuid="afe0dd06-d314-4648-adc9-76685ba3d33d"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Entre las fechas de ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="222" y="80" width="74" height="28" uuid="d1162177-e28d-4541-9642-44303be97134"/>
+				<reportElement x="251" y="80" width="75" height="28" uuid="d1162177-e28d-4541-9642-44303be97134"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fechaInicio}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="FixRelativeToBottom" x="296" y="80" width="14" height="29" uuid="d4fd6f90-6cce-450e-a777-d8af8ca47b98"/>
+				<reportElement positionType="FixRelativeToBottom" x="327" y="80" width="14" height="28" uuid="d4fd6f90-6cce-450e-a777-d8af8ca47b98"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ y ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="310" y="80" width="74" height="28" uuid="ee7a096e-bdc1-49d9-9b5d-e81e6fe78653"/>
+				<reportElement x="340" y="80" width="75" height="28" uuid="ee7a096e-bdc1-49d9-9b5d-e81e6fe78653"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
