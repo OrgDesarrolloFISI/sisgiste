@@ -4,37 +4,23 @@
 <meta charset="ISO-8859-1">
 <title>Sistema de Gestion de Incidencias de Soporte Tecnico</title>
 <link rel="stylesheet"
-	href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+	href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
 <link rel="stylesheet"
-	href="/webjars/font-awesome/5.6.3/css/font-awesome.min.css" th:href="@{/webjars/font-awesome/5.6.3/css/font-awesome.min.css}" />
-	<link rel="stylesheet" type="text/css" href="/static/css/Adicional.css" th:href="@{/css/Adicional.css}"/>
-	<script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+	href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"
+	th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
+<link rel="stylesheet" type="text/css" href="/static/css/Adicional.css"
+	th:href="@{/css/Adicional.css}" />
+<script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 </head>
 <body id="fondo">
-	<!-- 
-	<div class="container">
-		<form class="form-signin" th:action="@{/logincheck}" method="POST">
-			<input type="hidden" name="${_crsf.parameterName}"
-				value="${_crsf.token}" />
-			<h2 class="form-singin-heading">Logearse</h2>
-			<label for="username" class="sr-only">Usuario:</label> <input
-				type="text" id="username" name="username" class="form-control"
-				placeholder="Usuario" /> <label for="password" class="sr-only">Contrase&ntilde;a:</label>
-			<input type="password" id="password" name="password"
-				class="form-control" placeholder="Contrase&ntilde;a" />
-			<div th:if="${error != null}" class="alert alert-danger" role="alert">Usuario
-				o contrase&ntilde;a incorrecta!</div>
-			<div th:if="${logout != null}" class="alert alert-info" role="alert">Logout
-				exitoso</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">
-				<i class="fas fa-sign-in-alt"></i>Ingresar
-			</button>
-		</form>
-	</div>-->
-
+	<div class="jumbotron bg-light text-center">
+		<h1>Sistema de Gesti&oacute;n de Incidencias de Soporte</h1>
+	</div>
 	<div class="container">
 		<div class="d-flex justify-content-center h-100">
-			<div class="card">
+			<div class="card mt-sm-5">
 				<div class="card-header">
 					<h3>Identif&iacute;quese</h3>
 				</div>
@@ -45,7 +31,7 @@
 							value="${_crsf.token}" />
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								<span class="input-group-text"><i class="fa fa-user"></i></span>
 							</div>
 							<input type="text" id="username" name="username"
 								class="form-control" placeholder="Usuario">
@@ -53,7 +39,7 @@
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+								<span class="input-group-text"><i class="fa fa-key"></i></span>
 							</div>
 							<input type="password" id="password" name="password"
 								class="form-control" placeholder="Contrase&ntilde;a">
@@ -72,6 +58,6 @@
 		</div>
 	</div>
 
-	
+
 </body>
 </html>

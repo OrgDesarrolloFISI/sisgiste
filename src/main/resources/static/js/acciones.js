@@ -25,12 +25,16 @@ function mostrarModal(boton){
 	var nombreOficina=$(boton).attr("nombreOficina");
 	
 	$("#idIncidenciaGuardar").val(IDIncidencia);
+	$("#recepcionistaInputHiddenGuardar").val(IDRecepcionista);
+	$("#oficinaInputHiddenGuardar").val(IDOficina);
+	
 	
 	$("#numeroTicket").text(IDIncidencia);
 	$("#opcionRecepcionista").attr("th:value",IDRecepcionista);
 	$("#opcionRecepcionista").attr("text",nombreRecepcionista);
 	$("#opcionOficina").attr("th:value",IDOficina);
 	$("#opcionOficina").attr("text",nombreOficina);
+	
 	
 	var opcionRecepcionista= new Option(nombreRecepcionista,IDRecepcionista);
 	$(opcionRecepcionista).html(nombreRecepcionista);

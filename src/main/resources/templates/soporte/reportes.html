@@ -6,29 +6,53 @@
 <link rel="stylesheet"
 	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
 <link rel="stylesheet"
-	th:href="@{/webjars/font-awesome/5.6.3/css/font-awesome.min.css}" />
-	<link rel="stylesheet" th:ref="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+	th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />
+<link rel="stylesheet" type="text/css" href="/static/css/Adicional.css"
+	th:href="@{/css/Adicional.css}" />
 </head>
-<body>
+<body id="fondo">
+	<div th:replace="fragments/navegador :: navegador"></div>
+	<div class="text-center bg-dark">
+		<h1 class="text-white">Reportes</h1>
+	</div>
 
-	<form class="form-inline" th:object="${busquedaReporte}"
-		th:action="@{/reporteImprimir}" method="post">
-		<label class="sr-only" for="inlineFormInputName2">Bolsista</label> 
-		<select	class="form-control mr-sm-2" th:field="*{idTecnico}">
-			<option th:each="tecnico : ${listaTecnicos}"
-				th:value="${tecnico.idTecnico}" th:text="${tecnico.nombreCompleto}"></option>
-		</select>
-		<div class="input-group mb-2 mr-sm-2">
-			<label class="sr-only" for="fechaInicio">Fecha Inicio</label> <input
-				id="fechaInicio" type="text" th:field="*{fechaInicioBusqueda}" />
-		</div>
-		<div class="input-group mb-2 mr-sm-2">
-			<label class="sr-only" for="fechaFin">Fecha Inicio</label> <input
-				id="fechaFin" type="text" th:field="*{fechaFinBusqueda}" />
+	<div class="bg-white">
+		<div th:if="${msj != null}" class="alert alert-danger alert-dismissible fade show"
+			role="alert">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>No se encontr&oacute; ninguna incidencia con esas caracter&iacute;sticas. </strong> 
+			Verifique que los datos sean correctos.
 		</div>
 
-		<button type="submit" class="btn btn-primary mb-2">Submit</button>
-	</form>
+		<h3 class="mt-sm-2">Reporte de servicios hecho por t&eacute;cnico</h3>
+		<form class="form-inline p-sm-1" th:object="${busquedaReporte}"
+			th:action="@{/reporteImprimir}" method="post" autocomplete="off">
+			<label class="col-form-label" for="inlineFormInputName2">T&eacute;cnico:</label>
+			<select class="form-control m-sm-2" th:field="*{idTecnico}">
+				<option th:each="tecnico : ${listaTecnicos}"
+					th:value="${tecnico.idTecnico}" th:text="${tecnico.nombreCompleto}"></option>
+			</select>
+			<div class="input-group mb-2 m-sm-2">
+				<label class="col-form-label" for="fechaInicio">Fecha
+					Inicio: </label> <input id="fechaInicio" type="text"
+					th:field="*{fechaInicioBusqueda}" required/>
+			</div>
+			<div class="input-group mb-2 m-sm-2">
+				<label class="col-form-label" for="fechaFin">Fecha Fin: </label> <input
+					id="fechaFin" type="text" th:field="*{fechaFinBusqueda}" required/>
+			</div>
+
+			<button type="submit" class="btn btn-primary mb-2">Generar
+				Reporte</button>
+		</form>
+	</div>
+
+
 
 	<!-- Agregamos el jquery y bootstrap -->
 	<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>

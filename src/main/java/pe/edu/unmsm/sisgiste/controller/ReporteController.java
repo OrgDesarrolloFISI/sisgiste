@@ -23,32 +23,48 @@ import pe.edu.unmsm.sisgiste.service.TecnicoService;
 
 @Controller
 public class ReporteController {
-	final String nombreArchivo= "ReporteBolsista";
-	
-	@Autowired IncidenciaService incidenciaService;
-	@Autowired TecnicoService tecnicoService;
-	
+	final String nombreArchivo = "ReporteBolsista";
+
 	@Autowired
-	@Qualifier(value=nombreArchivo)
+	IncidenciaService incidenciaService;
+	@Autowired
+	TecnicoService tecnicoService;
+
+	@Autowired
+	@Qualifier(value = nombreArchivo)
 	JasperReportsPdfView reporteBolsista;
-	
-	
-	
+
 	@RequestMapping("/reportes")
-	public ModelAndView vistaReporte(){
+	public ModelAndView vistaReporte() {
 		ModelAndView MAV = new ModelAndView("soporte/reportes");
 		MAV.addObject("busquedaReporte", new BusquedaReporte());
 		MAV.addObject("listaTecnicos", tecnicoService.obtenerTecnicos());
 		return MAV;
 	}
-	
+
 	@PostMapping("/reporteImprimir")
-	public ModelAndView verReporte(@ModelAttribute(name="busquedaReporte") BusquedaReporte busquedaReporte) throws IOException{
-		Map<String,Object> mapaParametros= new HashMap<>();
-		List<IncidenciaReporteModel> incidencias=incidenciaService.obtenerIncidenciasPorIdTecnicoPorFechasInicioFin(busquedaReporte.getIdTecnico(), busquedaReporte.getFechaInicioBusqueda(), busquedaReporte.getFechaFinBusqueda());
-		TecnicoModel T = tecnicoService.encontrarTecnicoPorID(Integer.parseInt(busquedaReporte.getIdTecnico()));
-		mapaParametros.put("datasource", new JRBeanCollectionDataSource(incidencias,false));
-		mapaParametros.put("nombreBolsista", T.getNombreCompleto());
-		return new ModelAndView(reporteBolsista, mapaParametros);
+	public ModelAndView verReporte(@ModelAttribute(name = "busquedaReporte") BusquedaReporte busquedaReporte)
+			throws IOException {
+		Map<String, Object> mapaParametros = new HashMap<>();
+		List<IncidenciaReporteModel> incidencias = incidenciaService.obtenerIncidenciasPorIdTecnicoPorFechasInicioFin(
+				busquedaReporte.getIdTecnico(), busquedaReporte.getFechaInicioBusqueda(),
+				busquedaReporte.getFechaFinBusqueda());
+		if (incidencias != null && !incidencias.isEmpty()) {
+			TecnicoModel T = tecnicoService.encontrarTecnicoPorID(Integer.parseInt(busquedaReporte.getIdTecnico()));
+			mapaParametros.put("datasource", new JRBeanCollectionDataSource(incidencias, false));
+			mapaParametros.put("nombreBolsista", T.getNombreCompleto());
+			mapaParametros.put("fechaInicio", busquedaReporte.getFechaInicioBusqueda());
+			mapaParametros.put("fechaFin", busquedaReporte.getFechaFinBusqueda());
+			return new ModelAndView(reporteBolsista, mapaParametros);
+		}
+		else {
+			ModelAndView MAV = new ModelAndView("soporte/reportes");
+			MAV.addObject("msj", "Error");
+			MAV.addObject("busquedaReporte", new BusquedaReporte());
+			MAV.addObject("listaTecnicos", tecnicoService.obtenerTecnicos());
+			return MAV;
+		}
 	}
+	
+	
 }

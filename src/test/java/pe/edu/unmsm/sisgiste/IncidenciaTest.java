@@ -99,13 +99,14 @@ public class IncidenciaTest {
 
 	@Test
 	public void mostrarIncidenciasReportePorFechas(){
-		String codigoTecnico="3";
-		String fechaInicio="21/01/2019";
-		String fechaFinal="29/01/2019";
+		String codigoTecnico="1";
+		String fechaInicio="01/01/2019";
+		String fechaFinal="02/01/2019";
 		
 		List <IncidenciaReporteModel> incidenciasReporte = incidenciaServ.obtenerIncidenciasPorIdTecnicoPorFechasInicioFin(codigoTecnico, fechaInicio, fechaFinal);
-		System.out.println(tiempo.obtenerFechaDeString(fechaInicio));
-		System.out.println(tiempo.obtenerFechaDeString(fechaFinal));
+		
+		System.out.println((incidenciasReporte.isEmpty())?"Es nulo":"No es nulo");
+		
 		for(IncidenciaReporteModel IRM : incidenciasReporte)
 			System.out.println(IRM);
 	}

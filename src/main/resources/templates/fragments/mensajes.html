@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/font-awesome/5.6.3/css/fontawesome.min.css}" />
+</head>
+<body>
+	<div th:fragment="noResultadosDialog" id="noResultadosDialog" title="Error: No se encontraron resultados">
+		No se encontr&oacute; ning&uacute;n resultado con la busqueda que se ingres&oacute;.
+	</div>
+
+
+
+
+	<!-- Agregamos el jquery, jquery ui y bootstrap -->
+	<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+	<script th:src="@{/js/adicional.js}"></script>
+</body>
+</html>
