@@ -103,4 +103,27 @@ public class IncidenciaServiceImpl implements IncidenciaService {
 		return incidenciaReporteLista;
 	}
 
+	@Override
+	public List<IncidenciaReporteModel> obtenerIncidenciasPorProblemaYLugarIncidencia(String problema, String idLugarIncidencia) {
+		List<IncidenciaReporteModel> incidenciaReporteLista = new ArrayList<IncidenciaReporteModel>();
+		problema="%"+problema+"%";
+		
+		if(idLugarIncidencia.equals("-1")){	//-1 significa no ha eligido oficinas
+			List<Incidencia> incidencias = incidenciaRepo.findbyLikeProblema(problema);
+			for (Incidencia I : incidencias) {
+				incidenciaReporteLista.add(incidenciaConvertor.convertirEntityAReporteModel(I));
+			}
+		}
+		else{
+			List<Incidencia> incidencias = incidenciaRepo.findbyLikeProblemaAndOficinaId(problema, Integer.parseInt(idLugarIncidencia));
+			for (Incidencia I : incidencias) {
+				incidenciaReporteLista.add(incidenciaConvertor.convertirEntityAReporteModel(I));
+			}
+		}
+		
+		return incidenciaReporteLista;
+	}
+	
+	
+
 }

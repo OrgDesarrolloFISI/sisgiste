@@ -11,7 +11,7 @@ public class LoginController {
 
 	
 	
-	@GetMapping({"/login", "/"})
+	@GetMapping("/login")
 	public String login(Model model,
 			@RequestParam(name="error", required=false) String error,
 			@RequestParam(name="logout", required=false) String logout) {
@@ -20,7 +20,7 @@ public class LoginController {
 		return "login";
 	}
 	
-	@GetMapping("/loginsuccess")
+	@GetMapping({"/loginsuccess","/"})
 	public String loginCheck() {
 		return "redirect:/operador";
 	}

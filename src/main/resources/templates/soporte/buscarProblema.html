@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SISGISTE</title>
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
+<link rel="stylesheet" type="text/css" href="/static/css/Adicional.css"
+	th:href="@{/css/Adicional.css}" />
+</head>
+<body id="fondo">
+	<div th:replace="fragments/navegador :: navegador"></div>
+	<h3 class="mt-sm-2 p-sm-2 bg-white">Reporte de servicios por
+		problema</h3>
+	<form id="formularioProblema" class="form-inline p-sm-1 bg-white"
+		autocomplete="off" onsubmit="enviarBusqueda()">
+
+		<label class="col-form-label" for="inlineFormInputName2">Lugar
+			de Incidencia:</label> <select class="form-control m-sm-2"
+			id="seleccionLugarIncidencia">
+			<option value="-1">---Elija una opcion---</option>
+			<option th:each="lugarIncidencia : ${listaLugaresIncidencia}"
+				th:value="${lugarIncidencia.idLugarIncidencia}"
+				th:text="${lugarIncidencia.nombreLugarIncidencia}"></option>
+		</select>
+		<div class="input-group mb-2 m-sm-2">
+			<label class="col-form-label" for="problemaPalabraClave">Problema
+				que se busca: </label> <input id="problemaPalabraClave" class="form-control"
+				type="text" />
+		</div>
+		<button type="button" class="btn btn-primary mb-2"
+			onclick="enviarBusqueda()">Buscar</button>
+	</form>
+
+	<table class="table" id="tabla">
+		<thead class="thead-dark">
+			<tr>
+				<th>Fecha</th>
+				<th>Lugar Incidencia</th>
+				<th>Problema</th>
+				<th>Solucion</th>
+			</tr>
+		</thead>
+	</table>
+
+
+
+	<!-- Agregamos el jquery el JavaScript con el AJAX -->
+	<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+	<script th:src="@{/js/tablasAjax.js}"></script>
+</body>
+</html>

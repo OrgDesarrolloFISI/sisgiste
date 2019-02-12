@@ -52,7 +52,14 @@ public class OperadorController {
 	@PostMapping("/actualizarIncidencia")
 	public String actualizarIncidencia(@ModelAttribute("incidencia") IncidenciaModel IM){
 		System.out.println("IM Recibido para actualizar: "+IM);
+		if(IM.getSBN()==null)IM.setSBN("-");
 		incidenciaService.actualizarIncidencia(IM);
 		return "redirect:/operador";
+	}
+	
+	@RequestMapping("/buscarProblema")
+	public String vistaBuscarProblema(Model model){
+		model.addAttribute("listaLugaresIncidencia",lugarIncidenciaService.obtenerLugaresIncidencia());
+		return "soporte/buscarProblema";
 	}
 }
