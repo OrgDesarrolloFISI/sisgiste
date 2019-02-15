@@ -16,4 +16,13 @@ public class JasperConfiguration {
 	  view.setReportDataKey("datasource");
 	  return view;
 	}
+	@Bean
+	@Qualifier(value="RankingTecnicos")
+	public JasperReportsPdfView getPlantillaPDFRanking() {
+	  JasperReportsPdfView view = new JasperReportsPdfView();
+	  view.setUrl("classpath:/reportes/RankingTecnicos.jrxml");
+	  view.setReportDataKey("datasource");
+	  return view;
+	}
+	
 }

@@ -12,7 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.edu.sistemas.sisgiste.entity.Tecnico;
 import pe.edu.sistemas.sisgiste.model.TecnicoModel;
+import pe.edu.sistemas.sisgiste.repository.TecnicoRepository;
 import pe.edu.sistemas.sisgiste.service.TecnicoService;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +23,7 @@ import pe.edu.sistemas.sisgiste.service.TecnicoService;
 public class TecnicoTest {
 
 	@Autowired TecnicoService tecnicoService;
+	@Autowired TecnicoRepository tecnicoRepository;
 	@Test
 	@Ignore
 	public void test() {
@@ -28,7 +31,8 @@ public class TecnicoTest {
 	}
 
 	@Test
-	public void obtenerTecnicos(){
+	@Ignore
+	public void obtenerTecnicosModel(){
 		List<TecnicoModel> TMList = tecnicoService.obtenerTecnicos();
 		for(TecnicoModel TM : TMList)
 			System.out.println(TM);
@@ -39,6 +43,13 @@ public class TecnicoTest {
 	public void obtenerTecnicoPorID(){
 		TecnicoModel TM = tecnicoService.encontrarTecnicoPorID(2);
 		System.out.println(TM);
+	}
+	
+	@Test
+	public void obtenerTecnicosMerito(){
+		List<TecnicoModel> TMList = tecnicoService.obtenerTecnicosConServiciosEntreFechas("27/01/2019", "31/01/2019");
+		for(TecnicoModel TM : TMList )
+			System.out.println(TM);
 	}
 
 }

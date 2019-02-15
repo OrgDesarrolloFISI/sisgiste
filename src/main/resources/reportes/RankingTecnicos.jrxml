@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rankingTecnicos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1125a810-2f1e-4859-a180-cb2a5d865961">
+	<property name="ireport.zoom" value="6.727499949325627"/>
+	<property name="ireport.x" value="305"/>
+	<property name="ireport.y" value="728"/>
+	<parameter name="fechaInicio" class="java.lang.String"/>
+	<parameter name="fechaFin" class="java.lang.String"/>
+	<field name="nombreCompleto" class="java.lang.String"/>
+	<field name="incidenciasAtendidas" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="29" uuid="450b3187-5e57-420b-b720-6c1af4f33210"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[RANKING DE TÉCNICOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="29" width="555" height="20" uuid="b874547c-096b-44de-b932-0c73977fb76c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[SEGÚN CANTIDAD DE INCIDENCIAS ATENDIDAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="317" y="49" width="10" height="14" uuid="b5fd30e7-cd90-49aa-bf78-3582aa984f6b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ y ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="178" y="49" width="86" height="14" uuid="5435dd0d-27f3-4e56-ba4c-b66849066220"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Entre las fechas de ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="264" y="49" width="53" height="14" uuid="b3df30bc-e0b7-44e5-8174-3381b4bac88e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="49" width="53" height="14" uuid="3ac4125c-4bfd-4dd1-8c5a-19051b48577b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaFin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<rectangle>
+				<reportElement x="72" y="0" width="311" height="34" backcolor="#CCCCCC" uuid="4f9a4a1a-ebd1-4663-9ba8-180ace9dfdda"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="383" y="0" width="135" height="34" backcolor="#CCCCCC" uuid="d433be55-a85f-428d-857d-051f8b1483a8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="36" y="0" width="36" height="34" backcolor="#CCCCCC" uuid="5d091a51-b78c-4883-be43-421b633f9836"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="36" y="0" width="36" height="34" uuid="f841e046-e519-4807-9de8-b9900eac5ad1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Ranking]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="72" y="1" width="311" height="33" uuid="3bd978cc-a6f6-4c6f-ab84-1ce79b308a74"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nombres y Apellidos del Técnico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="0" width="135" height="34" uuid="0ef9d2fc-4bf2-4e03-98ae-fd9a0d9de6bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cantidad de Incidencias Atendidas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<rectangle>
+				<reportElement x="383" y="0" width="135" height="38" backcolor="#F2F2F2" uuid="64af6892-3e49-43c4-aa7d-bd0872cc0e18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="72" y="0" width="311" height="38" backcolor="#F2F2F2" uuid="48b36250-ae04-4a17-b723-cd7100652906"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="36" y="0" width="36" height="38" backcolor="#F2F2F2" uuid="3e8d52a7-eb14-49c6-b12e-e4ba1ca75f92"/>
+			</rectangle>
+			<textField>
+				<reportElement x="36" y="0" width="36" height="38" uuid="ddec033c-c7b9-4432-a394-3cd92c54627a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="0" width="311" height="38" uuid="47b50220-94b7-4c87-bbcd-7077f3a26b10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreCompleto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="0" width="135" height="38" uuid="107eddde-b85b-4e02-9a93-e21ca97f5e7f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{incidenciasAtendidas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="486" y="0" width="28" height="20" uuid="f7c0ab3c-87e6-45ea-9ad8-8d70f57299cb"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="447" y="0" width="39" height="20" uuid="f1994eef-6c3b-4581-8fd2-a1b348cc1882"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

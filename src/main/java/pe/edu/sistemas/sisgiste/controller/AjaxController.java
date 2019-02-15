@@ -22,10 +22,11 @@ public class AjaxController {
 	@PostMapping("/mostrarIncidencias")
 	
 	public @ResponseBody String mostrarIncidencias(@RequestParam("problema") String problema,
-			@RequestParam("idLugarIncidencia") String idLugarIncidencia) {
-		System.out.println("Problema: "+problema+". idLugarIncidencia: "+idLugarIncidencia);
+			@RequestParam("idLugarIncidencia") String idLugarIncidencia,@RequestParam("idEquipo") String idEquipo) {
+		//System.out.println("Problema: "+problema+". idLugarIncidencia: "+idLugarIncidencia+". idEquipo: "+idEquipo);
+		
 		List<IncidenciaReporteModel> incidencias = incidenciaService
-				.obtenerIncidenciasPorProblemaYLugarIncidencia(problema, idLugarIncidencia);
+				.obtenerIncidenciasPorProblemaYLugarIncidenciaYEquipo(problema, idLugarIncidencia,idEquipo);
 		StringBuilder html = new StringBuilder();
 		html.append("<table class=\"table\">");
 		html.append("<thead class=\"thead-dark\">");
@@ -49,7 +50,7 @@ public class AjaxController {
 			}
 			html.append("</table>");
 		} else {
-			html.append("<tr class=\"bg-white\">");
+			html.append("<tr class=\"bg-danger text-light\">");
 
 			html.append("<td> NO </td>");
 			html.append("<td> HAY </td>");
@@ -58,7 +59,7 @@ public class AjaxController {
 
 			html.append("</tr>");
 		}
-		System.out.println(html.toString());
+		//System.out.println(html.toString());
 
 		return html.toString();
 	}

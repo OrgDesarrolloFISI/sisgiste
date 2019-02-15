@@ -17,13 +17,20 @@
 	<form id="formularioProblema" class="form-inline p-sm-1 bg-white"
 		autocomplete="off" onsubmit="enviarBusqueda()">
 
-		<label class="col-form-label" for="inlineFormInputName2">Lugar
+		<label class="col-form-label" for="seleccionLugarIncidencia">Lugar
 			de Incidencia:</label> <select class="form-control m-sm-2"
 			id="seleccionLugarIncidencia">
-			<option value="-1">---Elija una opcion---</option>
+			<option value="-1">Todos los lugares</option>
 			<option th:each="lugarIncidencia : ${listaLugaresIncidencia}"
 				th:value="${lugarIncidencia.idLugarIncidencia}"
 				th:text="${lugarIncidencia.nombreLugarIncidencia}"></option>
+		</select>
+		<label class="col-form-label" for="seleccionEquipo">Equipo:</label> <select class="form-control m-sm-2"
+			id="seleccionEquipo">
+			<option value="-1">Todo tipo de equipo</option>
+			<option th:each="equipo : ${listaEquipos}"
+				th:value="${equipo.idTipoEquipo}"
+				th:text="${equipo.nombreTipoEquipo}"></option>
 		</select>
 		<div class="input-group mb-2 m-sm-2">
 			<label class="col-form-label" for="problemaPalabraClave">Problema

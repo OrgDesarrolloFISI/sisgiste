@@ -104,26 +104,38 @@ public class IncidenciaServiceImpl implements IncidenciaService {
 	}
 
 	@Override
-	public List<IncidenciaReporteModel> obtenerIncidenciasPorProblemaYLugarIncidencia(String problema, String idLugarIncidencia) {
+	public List<IncidenciaReporteModel> obtenerIncidenciasPorProblemaYLugarIncidenciaYEquipo(String problema,
+			String idLugarIncidencia, String idEquipo) {
 		List<IncidenciaReporteModel> incidenciaReporteLista = new ArrayList<IncidenciaReporteModel>();
-		problema="%"+problema+"%";
-		
-		if(idLugarIncidencia.equals("-1")){	//-1 significa no ha eligido oficinas
-			List<Incidencia> incidencias = incidenciaRepo.findbyLikeProblema(problema);
-			for (Incidencia I : incidencias) {
-				incidenciaReporteLista.add(incidenciaConvertor.convertirEntityAReporteModel(I));
+		problema = "%" + problema + "%";
+		List<Incidencia> incidencias=new ArrayList<>();
+		if (idLugarIncidencia.equals("-1")) { // -1 significa no ha eligido
+												// oficinas
+			if (idEquipo.equals("-1")) { // -1 significa no ha eligido tipo
+											// equipo
+				incidencias = incidenciaRepo.findbyLikeProblema(problema);
+				
+			} else { // Ha elegido tipo de equipo pero no lugar de incidencias
+				incidencias = incidenciaRepo.findbyLikeProblemaAndEquipoId(problema,
+						Integer.parseInt(idEquipo));
 			}
-		}
-		else{
-			List<Incidencia> incidencias = incidenciaRepo.findbyLikeProblemaAndOficinaId(problema, Integer.parseInt(idLugarIncidencia));
-			for (Incidencia I : incidencias) {
-				incidenciaReporteLista.add(incidenciaConvertor.convertirEntityAReporteModel(I));
+			
+		} else { // Ha elegido lugar de incidencias
+			if (idEquipo.equals("-1")) { // Ha elegido lugar de incidencia pero
+											// no ha elegido tipo equipo
+				incidencias = incidenciaRepo.findbyLikeProblemaAndOficinaId(problema,
+						Integer.parseInt(idLugarIncidencia));
+				
+			} else { // Ha elegido lugar de incidencia y tipo de equipo
+				incidencias = incidenciaRepo.findbyLikeProblemaAndLugarIncidenciaIdAndEquipoId(
+						problema, Integer.parseInt(idLugarIncidencia), Integer.parseInt(idEquipo));
 			}
+			
 		}
-		
+		for (Incidencia I : incidencias) {
+			incidenciaReporteLista.add(incidenciaConvertor.convertirEntityAReporteModel(I));
+		}
 		return incidenciaReporteLista;
 	}
-	
-	
 
 }

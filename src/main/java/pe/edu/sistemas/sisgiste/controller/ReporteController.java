@@ -24,7 +24,7 @@ import pe.edu.sistemas.sisgiste.service.TecnicoService;
 @Controller
 public class ReporteController {
 	final String nombreArchivo = "ReporteBolsista";
-
+	final String nombreArchivoRanking = "RankingTecnicos";
 	@Autowired
 	IncidenciaService incidenciaService;
 	@Autowired
@@ -34,6 +34,11 @@ public class ReporteController {
 	@Qualifier(value = nombreArchivo)
 	JasperReportsPdfView reporteBolsista;
 
+	@Autowired
+	@Qualifier(value = nombreArchivoRanking)
+	JasperReportsPdfView reporteRanking;
+	
+	
 	@RequestMapping("/reportes")
 	public ModelAndView vistaReporte() {
 		ModelAndView MAV = new ModelAndView("soporte/reportes");
@@ -42,7 +47,7 @@ public class ReporteController {
 		return MAV;
 	}
 
-	@PostMapping("/reporteImprimir")
+	@PostMapping("/reporteTecnico")
 	public ModelAndView verReporte(@ModelAttribute(name = "busquedaReporte") BusquedaReporte busquedaReporte)
 			throws IOException {
 		Map<String, Object> mapaParametros = new HashMap<>();
@@ -58,13 +63,36 @@ public class ReporteController {
 			return new ModelAndView(reporteBolsista, mapaParametros);
 		}
 		else {
-			ModelAndView MAV = new ModelAndView("soporte/reportes");
-			MAV.addObject("msj", "Error");
-			MAV.addObject("busquedaReporte", new BusquedaReporte());
-			MAV.addObject("listaTecnicos", tecnicoService.obtenerTecnicos());
-			return MAV;
+			return vistaError();
 		}
 	}
+	
+	@PostMapping("/reporteRanking")
+	public ModelAndView verReporteRanking(@ModelAttribute(name = "busquedaReporte") BusquedaReporte busquedaReporte)
+			throws IOException {
+		Map<String, Object> mapaParametros = new HashMap<>();
+		List<TecnicoModel> tecnicos = tecnicoService.obtenerTecnicosConServiciosEntreFechas(busquedaReporte.getFechaInicioBusqueda(), busquedaReporte.getFechaFinBusqueda());
+
+		if (tecnicos != null && !tecnicos.isEmpty()) {
+			mapaParametros.put("datasource", new JRBeanCollectionDataSource(tecnicos, false));
+			mapaParametros.put("fechaInicio", busquedaReporte.getFechaInicioBusqueda());
+			mapaParametros.put("fechaFin", busquedaReporte.getFechaFinBusqueda());
+			return new ModelAndView(reporteRanking, mapaParametros);
+		}
+		else {
+			return vistaError();
+		}
+	}
+	
+	
+	private ModelAndView vistaError(){
+		ModelAndView MAV = new ModelAndView("soporte/reportes");
+		MAV.addObject("msj", "Error");
+		MAV.addObject("busquedaReporte", new BusquedaReporte());
+		MAV.addObject("listaTecnicos", tecnicoService.obtenerTecnicos());
+		return MAV;
+	}
+	
 	
 	
 }

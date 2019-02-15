@@ -22,13 +22,37 @@ public class Tiempo {
 		int mes = Integer.parseInt(fechaPartes[1])-1;
 		int anio = Integer.parseInt(fechaPartes[2]);
 		
-		cal.set(anio,mes,dia);
+		cal.set(anio,mes,dia,0,0,0);
 		Date fecha=cal.getTime();
 		
 		return fecha;
-		
 	}
-	
+	public Date obtenerFechaComenzandoDiaDeString(String fechaString){
+		Calendar cal=Calendar.getInstance();
+
+		String [] fechaPartes= fechaString.split("/");		//Formato: dd/mm/yyyy
+		int dia = Integer.parseInt(fechaPartes[0]);
+		int mes = Integer.parseInt(fechaPartes[1])-1;
+		int anio = Integer.parseInt(fechaPartes[2]);
+		
+		cal.set(anio,mes,dia,0,0,0);
+		Date fecha=cal.getTime();
+		
+		return fecha;
+	}
+	public Date obtenerFechaAcabandoDiaDeString(String fechaString){
+		Calendar cal=Calendar.getInstance();
+
+		String [] fechaPartes= fechaString.split("/");		//Formato: dd/mm/yyyy
+		int dia = Integer.parseInt(fechaPartes[0]);
+		int mes = Integer.parseInt(fechaPartes[1])-1;
+		int anio = Integer.parseInt(fechaPartes[2]);
+		
+		cal.set(anio,mes,dia,23,59,59);
+		Date fecha=cal.getTime();
+		
+		return fecha;
+	}
 	public String obtenerFechaActual(){
 		Date fechaActual= new Date();
 		Calendar cal= Calendar.getInstance();
@@ -38,7 +62,7 @@ public class Tiempo {
 		return salida;
 	}
 	
-	public String convertirADosCifras(int fecha){
+	private String convertirADosCifras(int fecha){
 		String mesString="";
 		if(fecha>=0 && fecha<=9)
 			mesString+="0";

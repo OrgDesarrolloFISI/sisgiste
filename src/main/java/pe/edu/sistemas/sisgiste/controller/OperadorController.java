@@ -60,6 +60,7 @@ public class OperadorController {
 	@RequestMapping("/buscarProblema")
 	public String vistaBuscarProblema(Model model){
 		model.addAttribute("listaLugaresIncidencia",lugarIncidenciaService.obtenerLugaresIncidencia());
+		model.addAttribute("listaEquipos", tipoEquipoService.obtenerTiposEquipo());
 		return "soporte/buscarProblema";
 	}
 }

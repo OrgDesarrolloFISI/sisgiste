@@ -6,6 +6,7 @@ import pe.edu.sistemas.sisgiste.model.TecnicoModel;
 
 public interface TecnicoService {
 
-	public TecnicoModel encontrarTecnicoPorID(Integer ID);
-	public List<TecnicoModel> obtenerTecnicos();
+	public abstract TecnicoModel encontrarTecnicoPorID(Integer ID);
+	public abstract List<TecnicoModel> obtenerTecnicos();
+	public abstract List<TecnicoModel> obtenerTecnicosConServiciosEntreFechas(String fechaInicio, String fechaFin);
 }

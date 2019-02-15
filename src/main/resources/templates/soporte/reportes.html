@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8" />
 <title>SISGISTE</title>
 <link rel="stylesheet"
 	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
@@ -18,33 +18,53 @@
 		<h1 class="text-white">Reportes</h1>
 	</div>
 
-	<div class="bg-white">
-		<div th:if="${msj != null}" class="alert alert-danger alert-dismissible fade show"
-			role="alert">
+	<div class="bg-white p-sm-2">
+		<div th:if="${msj != null}"
+			class="alert alert-danger alert-dismissible fade show" role="alert">
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
-			<strong>No se encontr&oacute; ninguna incidencia con esas caracter&iacute;sticas. </strong> 
+			<strong>No se encontró nada con esas características. </strong>
 			Verifique que los datos sean correctos.
 		</div>
 
-		<h3 class="mt-sm-2">Reporte de servicios hecho por t&eacute;cnico</h3>
+		<h3 class="mt-sm-2">Reporte de servicios hecho por técnico</h3>
 		<form class="form-inline p-sm-1" th:object="${busquedaReporte}"
-			th:action="@{/reporteImprimir}" method="post" autocomplete="off">
-			<label class="col-form-label" for="inlineFormInputName2">T&eacute;cnico:</label>
-			<select class="form-control m-sm-2" th:field="*{idTecnico}">
+			th:action="@{/reporteTecnico}" method="post" autocomplete="off">
+			<label class="col-form-label" for="selectTecnico">Técnico:</label>
+			<select id="selectTecnico" class="form-control m-sm-2" th:field="*{idTecnico}">
 				<option th:each="tecnico : ${listaTecnicos}"
 					th:value="${tecnico.idTecnico}" th:text="${tecnico.nombreCompleto}"></option>
 			</select>
 			<div class="input-group mb-2 m-sm-2">
 				<label class="col-form-label" for="fechaInicio">Fecha
 					Inicio: </label> <input id="fechaInicio" type="text"
-					th:field="*{fechaInicioBusqueda}" required/>
+					th:field="*{fechaInicioBusqueda}" required />
 			</div>
 			<div class="input-group mb-2 m-sm-2">
 				<label class="col-form-label" for="fechaFin">Fecha Fin: </label> <input
-					id="fechaFin" type="text" th:field="*{fechaFinBusqueda}" required/>
+					id="fechaFin" type="text" th:field="*{fechaFinBusqueda}" required />
+			</div>
+
+			<button type="submit" class="btn btn-primary mb-2">Generar
+				Reporte</button>
+		</form>
+	</div>
+	<br/>
+	<div class="bg-white p-sm-2">
+		<h3 class="mt-sm-2">Reporte de cantidad de servicios entre fechas</h3>
+		<form class="form-inline p-sm-1" th:object="${busquedaReporte}"
+			th:action="@{/reporteRanking}" method="post" autocomplete="off">
+
+			<div class="input-group mb-2 m-sm-2">
+				<label class="col-form-label" for="fechaInicio2">Fecha
+					Inicio: </label> <input id="fechaInicio2" type="text"
+					th:field="*{fechaInicioBusqueda}" required />
+			</div>
+			<div class="input-group mb-2 m-sm-2">
+				<label class="col-form-label" for="fechaFin2">Fecha Fin: </label> <input
+					id="fechaFin2" type="text" th:field="*{fechaFinBusqueda}" required />
 			</div>
 
 			<button type="submit" class="btn btn-primary mb-2">Generar

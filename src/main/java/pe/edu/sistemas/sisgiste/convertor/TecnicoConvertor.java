@@ -14,6 +14,7 @@ public class TecnicoConvertor {
 		String nombreCompleto = T.getPersona().getPersonaNombre() + " " + T.getPersona().getPersonaAppaterno() + " "
 				+ T.getPersona().getPersonaApmaterno();
 		out.setNombreCompleto(nombreCompleto);
+		out.setIncidenciasAtendidas(T.getIncidenciasForTecnicoIdTecnicoSolucionador().size());
 		return out;
 	}
 }

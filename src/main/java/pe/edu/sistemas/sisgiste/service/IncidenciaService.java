@@ -12,5 +12,5 @@ public interface IncidenciaService {
 	public abstract List<IncidenciaModel> obtenerIncidenciasActivas();
 	public abstract List<IncidenciaReporteModel> obtenerIncidenciasPorIdTecnico(Integer idTecnico);
 	public abstract List<IncidenciaReporteModel> obtenerIncidenciasPorIdTecnicoPorFechasInicioFin(String idTecnico, String fechaInicio, String fechaFin);
-	public abstract List<IncidenciaReporteModel> obtenerIncidenciasPorProblemaYLugarIncidencia(String problema, String idLugarIncidencia);
+	public abstract List<IncidenciaReporteModel> obtenerIncidenciasPorProblemaYLugarIncidenciaYEquipo(String problema, String idLugarIncidencia, String idEquipo);
 }

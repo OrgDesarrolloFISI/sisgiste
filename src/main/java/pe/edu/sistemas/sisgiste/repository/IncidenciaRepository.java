@@ -28,11 +28,20 @@ public interface IncidenciaRepository extends JpaRepository<Incidencia, Integer>
 	public List<Incidencia> findIncidenciasConcluidasPorIdTecnicoEntreFechas(
 			@Param(value = "idTecnico") Integer idTecnico, @Param(value = "fechaInicio") Date fechaInicio,
 			@Param(value = "fechaFin") Date fechaFin);
-	
+
 	@Query("SELECT I from Incidencia as I WHERE I.estado= '0' AND I.problema like :problema")
-	public List<Incidencia> findbyLikeProblema(@Param(value="problema")String problema);
-	
+	public List<Incidencia> findbyLikeProblema(@Param(value = "problema") String problema);
+
 	@Query("SELECT I from Incidencia as I WHERE I.estado= '0' AND I.problema like :problema AND I.lugarIncidencia.idLugarIncidencia = :idLugarIncidencia")
-	public List<Incidencia> findbyLikeProblemaAndOficinaId(@Param(value="problema")String problema, @Param(value="idLugarIncidencia")Integer idLugarIncidencia);
-	
+	public List<Incidencia> findbyLikeProblemaAndOficinaId(@Param(value = "problema") String problema,
+			@Param(value = "idLugarIncidencia") Integer idLugarIncidencia);
+
+	@Query("SELECT I from Incidencia as I WHERE I.estado= '0' AND I.problema like :problema AND I.tipoEquipo.idTipoEqupo = :idTipoEqupo")
+	public List<Incidencia> findbyLikeProblemaAndEquipoId(@Param(value = "problema") String problema,
+			@Param(value = "idTipoEqupo") Integer idTipoEqupo);
+
+	@Query("SELECT I from Incidencia as I WHERE I.estado= '0' AND I.problema like :problema AND I.lugarIncidencia.idLugarIncidencia = :idLugarIncidencia AND I.tipoEquipo.idTipoEqupo = :idTipoEqupo")
+	public List<Incidencia> findbyLikeProblemaAndLugarIncidenciaIdAndEquipoId(
+			@Param(value = "problema") String problema, @Param(value = "idLugarIncidencia") Integer idLugarIncidencia,
+			@Param(value = "idTipoEqupo") Integer idTipoEqupo);
 }
